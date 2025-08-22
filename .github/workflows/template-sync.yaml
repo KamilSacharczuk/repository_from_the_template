@@ -25,9 +25,10 @@ jobs:
       - name: Checkout
         # https://github.com/actions/checkout#usage
         uses: actions/checkout@v4
-        # with:
+        with:
           # submodules: true
           # token: ${{ steps.generate_token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
