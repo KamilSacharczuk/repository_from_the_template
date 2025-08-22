@@ -31,7 +31,7 @@ jobs:
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
         with:
+          source_gh_token: ${{ steps.generate_token.outputs.token }}
           source_repo_path: KamilSacharczuk/test_template
           upstream_branch: main
           pr_labels: dp_template,sync,test
-          token: ${{ steps.generate_token.outputs.token }}
