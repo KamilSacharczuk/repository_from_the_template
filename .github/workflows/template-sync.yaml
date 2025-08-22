@@ -26,7 +26,7 @@ jobs:
         with:
           app_id: ${{ vars.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
-          owner: KamilSacharczuk
+          # owner: KamilSacharczuk
           repositories: test_template,${{ github.event.repository.name }}
 
       - name: Checkout
