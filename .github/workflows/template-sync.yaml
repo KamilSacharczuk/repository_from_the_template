@@ -24,8 +24,8 @@ jobs:
         # uses: actions/create-github-app-token@v1
         uses: tibdex/github-app-token@v2
         with:
-          app-id: ${{ vars.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          app_id: ${{ vars.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
           owner: KamilSacharczuk
           repositories: test_template,${{ github.event.repository.name }}
 
