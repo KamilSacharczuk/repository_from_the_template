@@ -20,7 +20,7 @@ jobs:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           owner: KamilSacharczuk
-          repositories: test_template
+          repositories: test_template,${{ github.event.repository.name }}
 
       - name: Generate a token for current repository
         id: generate_target_token
