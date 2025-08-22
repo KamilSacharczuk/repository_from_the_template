@@ -37,3 +37,4 @@ jobs:
           upstream_branch: main
           pr_labels: dp_template,sync,test
           target_gh_token: ${{ secrets.GITHUB_TOKEN }}
+          is_dry_run: true
