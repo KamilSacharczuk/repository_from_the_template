@@ -13,20 +13,19 @@ jobs:
       pull-requests: write
 
     steps:
-      # To use this repository's private action, you must check out the repository
-      - name: Checkout
-        uses: actions/checkout@v4
-        # https://github.com/actions/checkout#usage
-        # uncomment if you use submodules within the repository
-        # with:
-        #   submodules: true
-
       - name: Generate a token
         id: generate_token
         uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Checkout
+        # https://github.com/actions/checkout#usage
+        uses: actions/checkout@v4
+        with:
+          # submodules: true
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
