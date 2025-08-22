@@ -22,12 +22,13 @@ jobs:
           owner: KamilSacharczuk
           repositories: test_template
 
+
       - name: Checkout
         # https://github.com/actions/checkout#usage
         uses: actions/checkout@v4
         with:
           # submodules: true
-          token: ${{ steps.generate_token.outputs.token }}
+          token: ${{ steps.generate_source_token.outputs.token }}
 
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
