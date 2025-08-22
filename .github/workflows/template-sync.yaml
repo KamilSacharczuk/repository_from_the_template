@@ -21,9 +21,17 @@ jobs:
         # with:
         #   submodules: true
 
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
         with:
           source_repo_path: KamilSacharczuk/test_template
           upstream_branch: main
           pr_labels: dp_template,sync,test
+          token: ${{ steps.generate_token.outputs.token }}
