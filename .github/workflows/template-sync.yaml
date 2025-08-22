@@ -20,23 +20,15 @@ jobs:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           owner: KamilSacharczuk
-          repositories: test_template,${{ github.event.repository.name }}
-
-      - name: Generate a token for current repository
-        id: generate_target_token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ vars.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
-          repositories: ${{ github.event.repository.name }}
+          repositories: test_template
 
       - name: Checkout
         # https://github.com/actions/checkout#usage
         uses: actions/checkout@v4
         with:
           # submodules: true
-          token: ${{ steps.generate_source_token.outputs.token }}
+          # token: ${{ steps.generate_source_token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
@@ -45,5 +37,5 @@ jobs:
           source_repo_path: KamilSacharczuk/test_template
           upstream_branch: main
           pr_labels: dp_template,sync,test
-          target_gh_token: ${{ steps.generate_target_token.outputs.token }}
+          target_gh_token: ${{ secrets.GITHUB_TOKEN }}
           # is_dry_run: true
