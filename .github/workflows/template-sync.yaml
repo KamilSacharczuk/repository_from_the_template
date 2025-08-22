@@ -33,8 +33,9 @@ jobs:
       - name: Checkout
         # https://github.com/actions/checkout#usage
         uses: actions/checkout@v4
-        # with:
+        with:
           # token: ${{ steps.generate_token.outputs.token }}
+          persist-credentials: false
 
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
