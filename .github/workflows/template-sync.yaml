@@ -22,6 +22,12 @@ jobs:
           owner: KamilSacharczuk
           repositories: test_template
 
+      - name: Generate a token for current repository
+        id: generate_target_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Checkout
         # https://github.com/actions/checkout#usage
@@ -38,4 +44,4 @@ jobs:
           upstream_branch: main
           pr_labels: dp_template,sync,test
           target_gh_token: ${{ secrets.GITHUB_TOKEN }}
-          is_dry_run: true
+          # is_dry_run: true
