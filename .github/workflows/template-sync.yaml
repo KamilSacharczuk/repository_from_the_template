@@ -17,8 +17,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      # Add this permission to allow changes to workflow files
-      workflows: write
 
 
     steps:
