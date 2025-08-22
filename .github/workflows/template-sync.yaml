@@ -13,8 +13,8 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Generate a token
-        id: generate_token
+      - name: Generate a source repo token
+        id: generate_source_token
         uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ vars.APP_ID }}
@@ -27,12 +27,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           # submodules: true
-          token: ${{ steps.generate_token.outputs.token }}
+          # token: ${{ steps.generate_token.outputs.token }}
 
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
         with:
-          source_gh_token: ${{ steps.generate_token.outputs.token }}
+          source_gh_token: ${{ steps.generate_source_token.outputs.token }}
           source_repo_path: KamilSacharczuk/test_template
           upstream_branch: main
           pr_labels: dp_template,sync,test
