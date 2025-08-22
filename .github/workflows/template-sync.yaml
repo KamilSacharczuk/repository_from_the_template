@@ -4,6 +4,12 @@
 on:
   # manual trigger
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Log changes without creating a PR'
+        required: true
+        type: boolean
+        default: false
 jobs:
   repo-sync:
     runs-on: ubuntu-latest
@@ -13,29 +19,28 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Generate a source repo token
-        id: generate_source_token
+      - name: Generate a token
+        id: generate_token
         uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           owner: KamilSacharczuk
-          repositories: test_template
+          repositories: test_template,${{ github.event.repository.name }}
 
       - name: Checkout
         # https://github.com/actions/checkout#usage
         uses: actions/checkout@v4
         with:
           # submodules: true
-          # token: ${{ steps.generate_source_token.outputs.token }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
         with:
-          source_gh_token: ${{ steps.generate_source_token.outputs.token }}
+          source_gh_token: ${{ steps.generate_token.outputs.token }}
           source_repo_path: KamilSacharczuk/test_template
           upstream_branch: main
           pr_labels: dp_template,sync,test
-          target_gh_token: ${{ secrets.GITHUB_TOKEN }}
-          # is_dry_run: true
+          target_gh_token: ${{ steps.generate_token.outputs.token }}
+          is_dry_run: ${{ github.event.inputs.dry_run }}
