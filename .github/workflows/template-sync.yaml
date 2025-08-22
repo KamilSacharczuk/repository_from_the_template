@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         # https://github.com/actions/checkout#usage
         uses: actions/checkout@v4
-        with:
+        # with:
           # token: ${{ steps.generate_token.outputs.token }}
 
       - name: actions-template-sync
