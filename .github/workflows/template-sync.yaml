@@ -28,6 +28,8 @@ jobs:
         with:
           app-id: ${{ vars.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
 
       - name: Checkout
         # https://github.com/actions/checkout#usage
@@ -43,5 +45,5 @@ jobs:
           source_repo_path: KamilSacharczuk/test_template
           upstream_branch: main
           pr_labels: dp_template,sync,test
-          target_gh_token: ${{ secrets.GITHUB_TOKEN }}
+          target_gh_token: ${{ steps.generate_target_token.outputs.token }}
           # is_dry_run: true
