@@ -26,15 +26,16 @@ jobs:
         with:
           app_id: ${{ vars.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
-          # owner: KamilSacharczuk
-          repositories: test_template,${{ github.event.repository.name }}
+          owner: KamilSacharczuk
+          # repositories: test_template,${{ github.event.repository.name }}
+          repositories: test_template
 
       - name: Checkout
         # https://github.com/actions/checkout#usage
         uses: actions/checkout@v4
         with:
-          # submodules: true
           token: ${{ steps.generate_token.outputs.token }}
+          persist-credentials: false
 
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v2
@@ -43,5 +44,5 @@ jobs:
           source_repo_path: KamilSacharczuk/test_template
           upstream_branch: main
           pr_labels: dp_template,sync,test
-          target_gh_token: ${{ steps.generate_token.outputs.token }}
+          # target_gh_token: ${{ steps.generate_token.outputs.token }}
           is_dry_run: ${{ github.event.inputs.dry_run }}
