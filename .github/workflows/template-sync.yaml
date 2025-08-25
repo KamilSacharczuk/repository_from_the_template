@@ -42,7 +42,7 @@ jobs:
         with:
           source_gh_token: ${{ steps.generate_token.outputs.token }}
           source_repo_path: KamilSacharczuk/test_template
-          upstream_branch: main
+          upstream_branch: new-upstream
           pr_labels: dp_template,sync,test
           target_gh_token: ${{ secrets.GITHUB_TOKEN }}
           # target_gh_token: ${{ steps.generate_token.outputs.token }}
